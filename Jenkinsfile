@@ -1,6 +1,9 @@
 pipeline {
     agent {
         dockerfile true
+        docker {
+        	args  '-d -p 80:8080'
+        }
     }
     stages {
         stage('Test') {
@@ -10,7 +13,7 @@ pipeline {
         }
 
         stage('Deploy') {
-        	sh docker run -d -p 80:8080 jeeza/vuejs-webapp
+        	docker run jeeza/vuejs-webapp
         }
     }
 }
